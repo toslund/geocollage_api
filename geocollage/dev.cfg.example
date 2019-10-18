@@ -1,14 +1,12 @@
 # Development configuration
 import os
 
-#!!NOW USING EMPTY STRING INSTEAD OF PLACEHOLDER TO AVOID BOT CONFUSION!!
-
 DEBUG = True
 MAILGUN_KEY = ''
 MAILGUN_DOMAIN = ''
 SECRET_KEY = ''
 STRIPE_KEY = ''
-DEV_EMAIL = 'example@example.com'  #CHANGE
+DEV_EMAIL = 'example@example.com'
 SECRET = '' 
 DATABASE_URL = 'sqlite:///dev.db'
 INVITE_CODE = ''
