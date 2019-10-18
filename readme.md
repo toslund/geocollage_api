@@ -4,7 +4,7 @@ geocollage is a basic backend API for GeoCollage It uses Stripe for managing bil
 ## Running in Dev
 
 Install requirments:  
-`pip install -e .`  
+`pip install -r requirements.txt`  
   
 Rename dev.cfg.example to dev.cfg and fill in required vars.  
   
