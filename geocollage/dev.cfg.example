@@ -1,0 +1,20 @@
+# Development configuration
+import os
+
+#!!NOW USING EMPTY STRING INSTEAD OF PLACEHOLDER TO AVOID BOT CONFUSION!!
+
+DEBUG = True
+MAILGUN_KEY = ''
+MAILGUN_DOMAIN = ''
+SECRET_KEY = ''
+STRIPE_KEY = ''
+DEV_EMAIL = 'example@example.com'  #CHANGE
+SECRET = '' 
+DATABASE_URL = 'sqlite:///dev.db'
+INVITE_CODE = ''
+REQUIRE_INVITE = '' #anything other than true defaults to false in /resources/users
+DUMP_SECRET = ''
+FRONT_END_BASE_URL = 'http://localhost:8080/'
+
+
+
