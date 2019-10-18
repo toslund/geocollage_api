@@ -55,6 +55,22 @@ class UsersResource(Resource):
                 )
             user.id_stripe = customer.id    
             db.session.commit()
+
+            ## The following section attempts to give new users a free trial subscription if the app is in alpha phase, there is a plan_id stored, and a valid coupon for 100% off
+            if app.config.get('RELEASE') == 'alpha' and app.config.get('PLAN_ID'):
+                coupon_id = None
+                coupons = stripe.Coupon.list()
+                for coupon in coupons:
+                    if coupon.percent_off == 100:
+                        coupon_id = coupon.id
+                        break
+                if coupon_id:    
+                    subscription = stripe.Subscription.create(
+                        customer=customer.id ,
+                        items=[{'plan': app.config.get('PLAN_ID')}],
+                        coupon=coupon_id,
+                    )
+
             token = security.generate_token(email)
             user_dict = user.to_dict()
             user_dict['token'] = token

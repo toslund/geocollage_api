@@ -2,6 +2,8 @@
 import os
 
 DEBUG = True
+RELEASE = ''
+PLAN_ID = ''
 MAILGUN_KEY = ''
 MAILGUN_DOMAIN = ''
 SECRET_KEY = ''

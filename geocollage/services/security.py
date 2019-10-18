@@ -57,21 +57,17 @@ def generate_reset_token(email):
 
 def send_message(name, email, message):
     if os.environ.get("ENV") == 'prod':
-        pass
-    else:
         email = app.config['DEV_EMAIL']
     return requests.post(
         f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
         auth=("api", app.config['MAILGUN_KEY']),
         data={"from": f'Mailgun Sandbox <postmaster@{app.config["MAILGUN_DOMAIN"]}.mailgun.org>',
             "to": f'{name} <{email}>',
-            "subject": f'Hello {name}'',
+            "subject": f'Hello {name}',
             "text": message})
 
 def send_welcome_message(email):
     if os.environ.get("ENV") == 'prod':
-        pass
-    else:
         email = app.config['DEV_EMAIL']
     return requests.post(
         f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
@@ -84,8 +80,6 @@ def send_welcome_message(email):
 def send_reset_message(email, token):
     reset_url = app.config['FRONT_END_BASE_URL'] + f'auth/reset?token={token}'
     if os.environ.get("ENV") == 'prod':
-        pass
-    else:
         email = app.config['DEV_EMAIL']
     return requests.post(
         f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
@@ -93,7 +87,7 @@ def send_reset_message(email, token):
         data={"from": f"Mailgun Sandbox <postmaster@{app.config['MAILGUN_DOMAIN']}.mailgun.org>",
             "to": f'Timothy Oslund <{email}>',
             "subject": "Hello Timothy Oslund",
-            "text": f'Hi, Thanks It looks like you have requested to reset your password. The following link will be valid for the next 24 hours: {reset_url}''})               
+            "text": f'Hi, Thanks It looks like you have requested to reset your password. The following link will be valid for the next 24 hours: {reset_url}'})               
 
 def verified_token(token):
     app.logger.debug(f'verifying token: {token}')

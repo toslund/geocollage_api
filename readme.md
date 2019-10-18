@@ -16,7 +16,7 @@ Create tables:
 `python manage.py`  
   
 Create super user:  
-`python create_superuser.py SuperUser superuser@example.com password`  
+`python create_superuser.py superuser@example.com password`  
   
 Optionally, set logging preference. Defaults to INFO in dev mode:  
 `export LOGGING=DEBUG`  
