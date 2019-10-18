@@ -61,11 +61,11 @@ def send_message(name, email, message):
     else:
         email = app.config['DEV_EMAIL']
     return requests.post(
-        f'https://api.mailgun.net/v3/{app.config['MAILGUN_DOMAIN']}/messages',
+        f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
         auth=("api", app.config['MAILGUN_KEY']),
-        data={"from": f"Mailgun Sandbox <postmaster@{app.config['MAILGUN_DOMAIN']}.mailgun.org>",
-            "to": f"{name} <{email}>",
-            "subject": f"Hello {name}",
+        data={"from": f'Mailgun Sandbox <postmaster@{app.config["MAILGUN_DOMAIN"]}.mailgun.org>',
+            "to": f'{name} <{email}>',
+            "subject": f'Hello {name}'',
             "text": message})
 
 def send_welcome_message(email):
@@ -74,12 +74,12 @@ def send_welcome_message(email):
     else:
         email = app.config['DEV_EMAIL']
     return requests.post(
-        f'https://api.mailgun.net/v3/{app.config['MAILGUN_DOMAIN']}/messages',
+        f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
         auth=("api", app.config['MAILGUN_KEY']),
-        data={"from": f"Mailgun Sandbox <postmaster@{app.config['MAILGUN_DOMAIN']}.mailgun.org>",
-            "to": f"Timothy Oslund <{email}>",
+        data={"from": f'Mailgun Sandbox <postmaster@{app.config["MAILGUN_DOMAIN"]}.mailgun.org>',
+            "to": f'Timothy Oslund <{email}>',
             "subject": "Hello Timothy Oslund",
-            "text": f"Hi, Thanks for creating an account with Collage Maker. No further action is needed."})
+            "text": "Hi, Thanks for creating an account with Collage Maker. No further action is needed."})
 
 def send_reset_message(email, token):
     reset_url = app.config['FRONT_END_BASE_URL'] + f'auth/reset?token={token}'
@@ -88,12 +88,12 @@ def send_reset_message(email, token):
     else:
         email = app.config['DEV_EMAIL']
     return requests.post(
-        f'https://api.mailgun.net/v3/{app.config['MAILGUN_DOMAIN']}/messages',
+        f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
         auth=("api", app.config['MAILGUN_KEY']),
         data={"from": f"Mailgun Sandbox <postmaster@{app.config['MAILGUN_DOMAIN']}.mailgun.org>",
-            "to": f"Timothy Oslund <{email}>",
+            "to": f'Timothy Oslund <{email}>',
             "subject": "Hello Timothy Oslund",
-            "text": f"Hi, Thanks It looks like you have requested to reset your password. The following link will be valid for the next 24 hours: {reset_url}"})               
+            "text": f'Hi, Thanks It looks like you have requested to reset your password. The following link will be valid for the next 24 hours: {reset_url}''})               
 
 def verified_token(token):
     app.logger.debug(f'verifying token: {token}')
