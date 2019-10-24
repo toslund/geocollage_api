@@ -13,8 +13,6 @@ setup(
         'PyJWT',
         'gunicorn',
         'psycopg2',
-        'python-slugify',
-        'bleach',
         'boto3',
         'stripe'
     ],
