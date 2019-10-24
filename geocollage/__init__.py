@@ -5,18 +5,16 @@ from flask_restful import Resource, Api
 
 
 print('Will create app')
-
+print('__name__ =' + __name__)
 app = Flask(__name__)
-
+print(app)
 # app.config.from_object('geocollage.default_settings')
 if os.environ.get("ENV") == "dev":
-    print('THIS APP IS IN DEV MODE. YOU SHOULD NOT SEE THIS IN PRODUCTION.')
+    print('App running in dev mode. YOU SHOULD NOT SEE THIS IN PRODUCTION.')
     app.config.from_pyfile('dev.cfg')
-elif os.environ.get("ENV") == "prod": 
-    print('starting app in production mode')
+else: 
+    print('App running in production mode.')
     app.config.from_pyfile('prod.cfg')
-else:
-    raise Exception('please set ENV to "prod" for production or "dev" for development')    
 
 # configure logging
 if os.environ.get("LOGGING"):

@@ -56,8 +56,6 @@ def generate_reset_token(email):
     return token
 
 def send_message(name, email, message):
-    if os.environ.get("ENV") == 'prod':
-        email = app.config['DEV_EMAIL']
     return requests.post(
         f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
         auth=("api", app.config['MAILGUN_KEY']),
@@ -67,8 +65,6 @@ def send_message(name, email, message):
             "text": message})
 
 def send_welcome_message(email):
-    if os.environ.get("ENV") == 'prod':
-        email = app.config['DEV_EMAIL']
     return requests.post(
         f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
         auth=("api", app.config['MAILGUN_KEY']),
@@ -79,8 +75,6 @@ def send_welcome_message(email):
 
 def send_reset_message(email, token):
     reset_url = app.config['FRONT_END_BASE_URL'] + f'auth/reset?token={token}'
-    if os.environ.get("ENV") == 'prod':
-        email = app.config['DEV_EMAIL']
     return requests.post(
         f'https://api.mailgun.net/v3/{app.config["MAILGUN_DOMAIN"]}/messages',
         auth=("api", app.config['MAILGUN_KEY']),
