@@ -1,13 +1,24 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
+from sqlalchemy import engine_from_config, create_engine
 from sqlalchemy import pool
 
 from alembic import context
 
+import os, sys
+sys.path.append(os.getcwd())
+
+from geocollage import db, app
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+#get function to get url
+def get_url():
+    url = app.config['SQLALCHEMY_DATABASE_URI']
+    assert url, "Database URL must be available in app"
+    return url
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -15,9 +26,9 @@ fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-# from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
-target_metadata = None
+from geocollage import db
+target_metadata = db.metadata
+# target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -37,7 +48,8 @@ def run_migrations_offline():
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url")
+    url = get_url()
+    print('running migrations offline with url: ' + url)
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -56,11 +68,15 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
+    print('running migrations online')
+    print(config.get_section(config.config_ini_section))
+    print(get_url())
+    connectable = create_engine(get_url())
+    # connectable = engine_from_config(
+    #     config.get_section(config.config_ini_section),
+    #     prefix="sqlalchemy.",
+    #     poolclass=pool.NullPool,
+    # )
 
     with connectable.connect() as connection:
         context.configure(

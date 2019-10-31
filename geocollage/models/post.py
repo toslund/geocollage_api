@@ -6,6 +6,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     id_uuid = db.Column(db.String(36), unique=True, nullable=False, default=lambda:str(uuid.uuid4()))
     title = db.Column(db.String(20), unique=True, nullable=False)
+    slug = db.Column(db.String(20), unique=True, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     publish_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)

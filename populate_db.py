@@ -7,8 +7,8 @@ from geocollage.models.post import Post
 
 #              ]
 
-with open('data.json', 'r') as f:
-    data = json.load(f)
+# with open('data.json', 'r') as f:
+#     data = json.load(f)
 
 
 # date_format = '2019-03-13'
@@ -19,17 +19,17 @@ with open('data.json', 'r') as f:
 #     fake_password = 'password'
 
 users = {}
-posts = []
+posts = [{'title': 'My Awesome Post', 'content': 'This is the content.', 'user_id': 95412}]
 
-for post in data['posts']:
+for post in posts:
+    print(post)
     new_post = Post(
                 title = post['title'],
                 content = post['content'],
                 user_id = post['user_id'])
     db.session.add(new_post)
-    posts.append(new_post)
 
-for user in data['users']:
+for user in users:
     new_user = User(id=user['id'],
                  username=user['username'],
                  email=user['email'],
@@ -37,7 +37,6 @@ for user in data['users']:
                  posts=[post for post in posts if post.user_id == user['id']],
                  password=user['password'])
     db.session.add(new_user)
-    users[new_user.id] = new_user
 
 
 

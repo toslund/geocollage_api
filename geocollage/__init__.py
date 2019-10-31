@@ -24,7 +24,7 @@ else:
 
 api = Api(app)
 
-#change name of databse url env from the heroku/config default to what flask-sqlalchemy expcets. This prevents you from having to manaully set this var in production.
+#change name of databse url env from the heroku/config default to what flask-sqlalchemy expcets. This prevents you from having to manaully if deploying to heroku.
 app.config['SQLALCHEMY_DATABASE_URI'] = app.config['DATABASE_URL']
 app.logger.debug(f'The sql alchemy database url is: {app.config["SQLALCHEMY_DATABASE_URI"]}')
 db = SQLAlchemy(app)
